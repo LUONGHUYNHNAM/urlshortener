@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Azure SQL Edge container
+  azuresqledge:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: azuresqledge
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Lhn2610@
+    ports:
+      - "1435:1433"
+    networks:
+      - mynetwork
+    restart: always
+
+  # Spring Boot application container
+  urlshortener:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: urlshortener-1
+    depends_on:
+      - azuresqledge
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://azuresqledge:1433;databaseName=shortenerurl;encrypt=true;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=Lhn2610@
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+    restart: always
+
+networks:
+  mynetwork:
+    driver: bridge
