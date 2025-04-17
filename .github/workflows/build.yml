@@ -21,7 +21,10 @@ jobs:
           distribution: 'temurin'
 
       - name: 🧪 Build & Test with Maven
-        run: mvn clean install
+        run: mvn clean install -Dspring.profiles.active=test
+
+      - name: 🧹 Check code formatting with Spotless
+        run: mvn spotless:check
 
       - name: 🐳 Build Docker image
         run: docker build -t urlshortener .
