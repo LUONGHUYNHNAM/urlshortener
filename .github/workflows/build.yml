@@ -2,9 +2,9 @@ name: Build and Test on dev
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "test-ci" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "test-ci" ]
 
 jobs:
   build:
