@@ -24,7 +24,7 @@ jobs:
         run: mvn clean install -Dspring.profiles.active=test
 
       - name: 🐳 Build Docker image
-        run: docker build -t urlshortener .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/urlshortener .
         
       # Đăng nhập vào DockerHub
       - name: 🔐 Login to DockerHub
