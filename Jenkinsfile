@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'luoghuynhnam/urlshortener:latest'
+        IMAGE_NAME = 'luonghuynhnam/urlshortener:latest'
         CONTAINER_NAME = 'urlshortener'
         PORT = '9001'
     }
